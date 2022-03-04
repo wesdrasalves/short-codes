@@ -6,3 +6,6 @@ Ao final adicionei uma trigger em JS para mostrar um div somente quando a anima�
 
 Codificado usando #html, #css e #javascript
 
+<p align="center">
+  <img width="100%" src="https://raw.githubusercontent.com/wesdrasalves/short-codes/main/loading-boxshadow/preview.gif" alt="Animação do resultudo final da implementação do layout"/>
+</p>
