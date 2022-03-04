@@ -7,4 +7,4 @@ Algumas ideias legais com códigos curtos, para adicionar em uma projeto, conhec
 
 <br />
 
-* [1 - Loading em box-shadow com trigger de animation no Javascript](tree/main/loading-boxshadow)
+* [1 - Loading em box-shadow com trigger de animation no Javascript](https://github.com/wesdrasalves/short-codes/tree/main/loading-boxshadow)
