@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading com Box-Shadow</title>
+
+    <style>
+        @keyframes loading {
+            0%{
+                box-shadow: 0px 0px rgba(0,0,0,0.9);
+            }
+            11%{
+                box-shadow: -21px 0px rgba(0,0,0,0.9);
+            }
+            22%{
+                box-shadow: -21px 0px rgba(0,0,0,0.9),
+                        -21px -21px rgba(0,0,0,0.8);
+            }
+            33%{
+                box-shadow: -21px 0px rgba(0,0,0,0.9),
+                        -21px -21px rgba(0,0,0,0.8),
+                        0px -21px rgba(0,0,0,0.7);
+            }
+            44%{
+                box-shadow: -21px 0px rgba(0,0,0,0.9),
+                        -21px -21px rgba(0,0,0,0.8),
+                        0px -21px rgba(0,0,0,0.7),
+                        21px -21px rgba(0,0,0,0.6);
+            }
+            55%{
+                box-shadow: -21px 0px rgba(0,0,0,0.9),
+                        -21px -21px rgba(0,0,0,0.8),
+                        0px -21px rgba(0,0,0,0.7),
+                        21px -21px rgba(0,0,0,0.6),
+                        21px 0px rgba(0,0,0,0.5);
+            }
+            66%{
+                box-shadow: -21px 0px rgba(0,0,0,0.9),
+                        -21px -21px rgba(0,0,0,0.8),
+                        0px -21px rgba(0,0,0,0.7),
+                        21px -21px rgba(0,0,0,0.6),
+                        21px 0px rgba(0,0,0,0.5),
+                        21px 21px rgba(0,0,0,0.4);
+            }
+            77%{
+                box-shadow: -21px 0px rgba(0,0,0,0.9),
+                        -21px -21px rgba(0,0,0,0.8),
+                        0px -21px rgba(0,0,0,0.7),
+                        21px -21px rgba(0,0,0,0.6),
+                        21px 0px rgba(0,0,0,0.5),
+                        21px 21px rgba(0,0,0,0.4),
+                        0px 21px rgba(0,0,0,0.3);
+            }
+            88%{
+                box-shadow: -21px 0px rgba(0,0,0,0.9),
+                        -21px -21px rgba(0,0,0,0.8),
+                        0px -21px rgba(0,0,0,0.7),
+                        21px -21px rgba(0,0,0,0.6),
+                        21px 0px rgba(0,0,0,0.5),
+                        21px 21px rgba(0,0,0,0.4),
+                        0px 21px rgba(0,0,0,0.3),
+                        -21px 21px rgba(0,0,0,0.2);
+            }
+        }
+
+        @keyframes showLoading {
+            from{
+                width: 0px;
+                height: 0px;
+                transform: rotate(0) translateX(0px);
+            }
+            to{
+                width: 20px;
+                height: 20px;
+                transform: rotate(180deg) translateX(10px);
+            }
+        }
+
+        @keyframes hideLoading {            
+            from{
+                width: 20px;
+                height: 20px;
+                transform: rotate(180deg) translateX(10px);
+            }
+            to{
+                width: 0px;
+                height: 0px;
+                transform: rotate(0) translateX(0px);
+            }
+        }
+
+        #loading{
+            width: 0px;
+            height: 0px;
+            background-color: #000;
+            border-radius: 30%;
+            animation: showLoading 1s 1s forwards cubic-bezier(.3,1.51,.79,1.56),
+                       loading 4 2s 2s alternate steps(1),
+                       hideLoading 1s 10s forwards cubic-bezier(.16,-0.56,.63,-0.4);
+        }
+
+        body{
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading"></div>
+    <div style="display:none" id="info">
+        <h1>Loading BoxShadow e trigger de animation</h1>
+        <p>
+            Esse texto somente aparecerá quando a animação de loading for finalizada, 
+            pois vou criar uma trigger via JS para fazer isso.
+        </p>
+    </div>
+    <script>
+        const loading = document.querySelector("#loading");
+        
+        //Vou precisar usar um closure no JS pois são 3 animações rodando.
+
+        const closureAnimationEnd = (() =>{
+            let countAnimation = 0;
+            return () => {
+                countAnimation++;
+                console.log(`Animação ${countAnimation} terminou`)
+                if(countAnimation ==3){
+                    console.log('Todas animações finalizaram')
+                    document.querySelector("#info").style.display = 'block';
+                }
+            }
+        })();
+        
+        loading.addEventListener('animationend', closureAnimationEnd)
+    </script>
+</body>
+</html>
